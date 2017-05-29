@@ -87,7 +87,7 @@ class ArregloFloral
       $this->descripcion      = $descripcion;
       $this->precio           = $precio;
       $this->disponibilidad   = $disponibilidad;
-      $this->imagenes         = add($imagen);
+      array_push($this->imagenes, $imagen);
    }
 }
 
