@@ -9,6 +9,11 @@
          header("Content-Type: text/html;charset=utf-8");
          include 'iflores.inc';
          $data = json_decode(file_get_contents('php://input'), true);
+         //Peticion vacia
+         if (is_null($data)) {
+            echo json_encode(array('errorCode' => 400 ));
+            return;
+         }
          echo json_encode($data);
          // $direccion = new Direccion('Circunvalación Norte','Satelite','32','6',
          //                            'Napoles','66723','Zaguan negro, con jardinera al frente.');
