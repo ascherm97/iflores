@@ -8,7 +8,7 @@
       return;
    }
    $sql = "INSERT INTO arreglofloral (nombre, descripcion, precio, disponibilidad)
-    VALUES ($data["nombre"], $data["descripcion"], $data["precio"], $data["disponibilidad"])";
+    VALUES ('".$data["nombre"]."', '".$data["descripcion"]."', ".$data["precio"].", '".$data["disponibilidad"]."')";
     echo $sql;
    $res = mysqli_query($conexion, $sql);
    $filasAfectadas = mysqli_affected_rows($conexion);
