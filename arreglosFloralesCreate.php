@@ -1,22 +1,31 @@
 <?php
-   header("Content-Type: text/html;charset=utf-8");
-   include 'iflores.inc';
-   $data = json_decode(file_get_contents('php://input'), true);
-   //Peticion vacia
-   if (is_null($data)) {
-      echo json_encode(array('errorCode' => 400 ));
-      return;
-   }
-   $sql = "INSERT INTO arreglofloral (nombre, descripcion, precio, disponibilidad)
-    VALUES ('".$data["nombre"]."', '".$data["descripcion"]."', ".$data["precio"].", '".$data["disponibilidad"]."')";
-    echo $sql;
-   $res = mysqli_query($conexion, $sql);
-   $filasAfectadas = mysqli_affected_rows($conexion);
-   //Si no se creo el arreglo floral, salir
-   if ($filasAfectadas != 1) {
-      echo json_encode( array('errorCode' => 500 ));
-      exit;
-   }
-
-   echo json_encode(array('code' => 203 ));
- ?>
+header("Content-Type: text/html;charset=utf-8");
+$data = json_decode(file_get_contents('php://input'), true);
+include 'ArreglosFlorales.inc';
+//Peticion vacia
+if (is_null($data)) {
+    echo json_encode(array('errorCode' => 400 ));
+    return;
+}
+//Inicializar objeto con las variables recibidas
+$arreglo = new ArregloFloral(
+    $data["nombre"],
+    $data["descripcion"],
+    $data["precio"],
+    $data["disponibilidad"]
+);
+//Intentar guardar el objeto en la BD
+if (!$arreglo->guardar()){
+    echo json_encode(array('code' => 500 ));
+}
+//Agregar cada url a la BD
+$imagenesAgregadas = 0;
+foreach ($data["imagenes"] as $imagen){
+    if ($arreglo->agregarImagen($imagen)){
+        $imagenesAgregadas =  $imagenesAgregadas + 1;
+    }
+}
+unset($imagen);
+//Como se completo el registro regresar el id del arreglo
+echo json_encode(array('idArreglo' => $arreglo->idArreglo));
+?>
