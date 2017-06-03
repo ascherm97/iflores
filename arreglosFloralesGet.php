@@ -5,16 +5,27 @@
          //DB connection setup
          include 'dbConn.inc';
          if (!$conexion) {
-             echo "Error: Unable to connect to MySQL." . PHP_EOL;
+             echo json_encode(array('code' => 500 ));
              exit;
          }
 
-
-         $sql = "SELECT idArreglo, nombre, descripcion, precio, disponibilidad, contenidoExtra FROM arreglofloral LEFT JOIN paquete ON idArreglo=fkArreglo";
+         //Obtener todos los productos de la BD
+         $sql = "SELECT idArreglo, nombre, descripcion, precio, disponibilidad,
+                contenidoExtra FROM arreglofloral LEFT JOIN paquete ON idArreglo=fkArreglo";
          $res = mysqli_query($conexion, $sql);
-         $rows = array();
+
+         //Serializar la informacion para regresarla como un JSON
+         $filas = array();
          while($r = mysqli_fetch_assoc($res)) {
-             $rows[] = $r;
+             //Obtener las imagenes de un producto
+             $sql =  "SELECT urlImagen FROM imagenes WHERE fkArreglo=".$r["idArreglo"];
+             $respuesta = mysqli_query($conexion, $sql);
+             //Serializa las imagenes correspondientes a cada producto
+             $r["imagenes"] = array();
+             while($f = mysqli_fetch_assoc($respuesta)) {
+                 array_push($r["imagenes"], $f["urlImagen"]);
+             }
+             $filas[] = $r;
          }
-         echo json_encode($rows);
+         echo json_encode($filas);
        ?>
