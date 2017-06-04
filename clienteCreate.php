@@ -35,5 +35,5 @@ if (!$cliente->guardar()){
 }
 
 //Como se completo el registro regresar el id del clietne
-echo json_encode(array('idArreglo' => $cliente->idCliente));
+echo json_encode(array('idCliente' => $cliente->idCliente));
 ?>
