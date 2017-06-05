@@ -6,22 +6,23 @@ include 'ArreglosFlorales.inc';
 include 'dbConn.inc';
 
 //Recuperar los datos de la peticion
-$data = json_decode(file_get_contents('php://input'), true);
+//$data = json_decode(file_get_contents('php://input'), true);
+$idArreglo = filter_input(INPUT_GET, 'idArreglo', FILTER_SANITIZE_NUMBER_INT);
 //Peticion vacia
-if (is_null($data)) {
+if (!$idArreglo) {
     echo json_encode(array('errorCode' => 400 ));
     return;
 }
 //Checar si hay conexion con la base de datos
 if (!$conexion) {
-    echo json_encode(array('code' => 500 ));
+    echo json_encode(array('errorCode' => 500 ));
     exit;
 }
 
 //Obtener la inforamcion de un producto
 $sql = "SELECT idArreglo, nombre, descripcion, precio, disponibilidad,
     contenidoExtra, idPaquete FROM arreglofloral LEFT JOIN paquete ON idArreglo=fkArreglo
-    WHERE idArreglo=".$data["idArreglo"];
+    WHERE idArreglo=".$idArreglo;
 $res = mysqli_query($conexion, $sql);
 //Checar si dio resultado
 if (!$res){
