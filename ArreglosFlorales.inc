@@ -56,6 +56,28 @@ Class ArregloFloral
         return true;
 
     }
+    //Actualiza este arreglo floral en la BD
+    //Regresa false sino se pudo hacer, true si fue exitoso
+    function actualizar()
+    {
+        //incluir la configuracion a la BD
+        include 'dbConn.inc';
+        $sql = "UPDATE arreglofloral SET "
+            ."nombre ='".$this->nombre."', "
+            ."descripcion ='".$this->descripcion."', "
+            ."precio =".$this->precio.", "
+            ."disponibilidad =".$this->disponibilidad
+            ." WHERE idArreglo=".$this->idArreglo;
+        $res = mysqli_query($conexion, $sql);
+        $filasAfectadas = mysqli_affected_rows($conexion);
+        echo $filasAfectadas;
+        //Si no se creo el arreglo floral, salir
+        if ($filasAfectadas != 1) {
+            return false;
+        }
+        mysqli_close($conexion);
+        return true;
+    }
 }
 
 ?>
