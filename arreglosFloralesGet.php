@@ -11,7 +11,7 @@ if (!$conexion) {
 
 //Obtener todos los productos de la BD
 $sql = "SELECT idArreglo, nombre, descripcion, precio, disponibilidad,
-    contenidoExtra FROM arreglofloral LEFT JOIN paquete ON idArreglo=fkArreglo";
+    idPaquete, contenidoExtra FROM arreglofloral LEFT JOIN paquete ON idArreglo=fkArreglo";
 $res = mysqli_query($conexion, $sql);
 if (!res){
     echo "{}";
