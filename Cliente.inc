@@ -56,6 +56,27 @@ class Cliente
         //Ya que se registro el cliente falta guardar su direccion
         return $this->direccion->guardar();
     }
-
+    //Actualiza este arreglo floral en la BD
+    //Regresa false sino se pudo hacer, true si fue exitoso
+    function actualizar()
+    {
+        //incluir la configuracion a la BD
+        include 'dbConn.inc';
+        $sql = "UPDATE cliente SET "
+            ."nombres='".$this->nombres."',"
+            ."apellidoPaterno='".$this->apellidoPaterno."',"
+            ."apellidoMaterno='".$this->apellidoMaterno."',"
+            ."telefono='".$this->telefono."',"
+            ."email='".$this->email."',"
+            ."passwordHashed='".$this->passwordHashed."'"
+            ." WHERE idCliente=".$this->idCliente;
+        $res = mysqli_query($conexion, $sql);
+        //Salir si no se hizo la query
+        if (!res) {
+            return $this->direccion->actualizar();
+        }
+        mysqli_close($conexion);
+        return $this->direccion->actualizar();
+    }
 }
 ?>

@@ -53,6 +53,30 @@ class Direccion
         mysqli_close($conexion);
         return true;
     }
+    //Actualiza este arreglo floral en la BD
+    //Regresa false sino se pudo hacer, true si fue exitoso
+    function actualizar()
+    {
+        //incluir la configuracion a la BD
+        include 'dbConn.inc';
+        $sql = "UPDATE direccion SET "
+            ."calle='".$this->calle."',"
+            ."colonia='".$this->colonia."',"
+            ."numeroExterior='".$this->numeroExterior."',"
+            ."numeroInterior='".$this->numeroInterior."',"
+            ."ciudad='".$this->ciudad."',"
+            ."codigoPostal='".$this->codigoPostal."',"
+            ."referencia='".$this->referencia."' "
+            ." WHERE idDireccion=".$this->idDireccion;
+        $res = mysqli_query($conexion, $sql);
+        //Si no se hizo la query salir
+        if (!$res) {
+            return false;
+        }
+        mysqli_close($conexion);
+        return true;
+    }
+
 
 }
 
