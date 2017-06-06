@@ -22,7 +22,9 @@ $direccion= new Direccion(
 
 //Inicializar objeto cliente con las variables recibidas
 $cliente= new Cliente(
-    $data["nombre"],
+    $data["nombres"],
+    $data["apellidoPaterno"],
+    $data["apellidoMaterno"],
     $data["telefono"],
     $data["email"],
     $data["password"],

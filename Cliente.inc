@@ -7,7 +7,9 @@ include 'Direccion.inc';
 class Cliente
 {
     public $idCliente;
-    public $nombre;
+    public $nombres;
+    public $apellidoPaterno;
+    public $apellidoMaterno;
     public $telefono;
     public $email;
     public $emailVerificado;
@@ -16,9 +18,11 @@ class Cliente
     public $tokenExpira;
     public $passwordHashed;
 
-    function __construct($nombre, $telefono, $email, $password, $direccion)
+    function __construct($nombres, $apellidoPaterno,$apellidoMaterno, $telefono, $email, $password, $direccion)
     {
-        $this->nombre             = $nombre;
+        $this->nombres            = $nombres;
+        $this->apellidoPaterno    = $apellidoPaterno;
+        $this->apellidoMaterno    = $apellidoMaterno;
         $this->telefono           = $telefono;
         $this->email              = $email;
         $this->emailVerificado    = 0;
@@ -31,9 +35,11 @@ class Cliente
     {
         //incluir la configuracion a la BD
         include 'dbConn.inc';
-        $sql = "INSERT INTO cliente(nombre, telefono, email, passwordHashed) "
+        $sql = "INSERT INTO cliente(nombres, apellidoPaterno, apellidoMaterno, telefono, email, passwordHashed) "
             ."VALUES ('"
-            .$this->nombre."','"
+            .$this->nombres."','"
+            .$this->apellidoPaterno."','"
+            .$this->apellidoMaterno."','"
             .$this->telefono."','"
             .$this->email."','"
             .$this->passwordHashed."')";
