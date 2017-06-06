@@ -25,5 +25,5 @@ if (!$paquete->guardar()){
 //unset($imagen);
 
 // Como se completo el registro regresar el id del arreglo
-echo json_encode(array('idArreglo' => $paquete->idArreglo));
+echo json_encode(array('idPaquete' => $paquete->idPaquete));
 ?>
