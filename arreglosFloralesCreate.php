@@ -5,7 +5,7 @@ include 'ArreglosFlorales.inc';
 //Peticion vacia
 if (is_null($data)) {
     echo json_encode(array('errorCode' => 400 ));
-    return;
+    exit;
 }
 //Inicializar objeto con las variables recibidas
 $arreglo = new ArregloFloral(
@@ -17,15 +17,16 @@ $arreglo = new ArregloFloral(
 //Intentar guardar el objeto en la BD
 if (!$arreglo->guardar()){
     echo json_encode(array('code' => 500 ));
+    exit;
 }
 //Agregar cada url a la BD
-$imagenesAgregadas = 0;
-foreach ($data["imagenes"] as $imagen){
-    if ($arreglo->agregarImagen($imagen)){
-        $imagenesAgregadas =  $imagenesAgregadas + 1;
-    }
-}
-unset($imagen);
-//Como se completo el registro regresar el id del arreglo
+//$imagenesAgregadas = 0;
+//foreach ($data["imagenes"] as $imagen){
+    //if ($arreglo->agregarImagen($imagen)){
+        //$imagenesAgregadas =  $imagenesAgregadas + 1;
+    //}
+//}
+//unset($imagen);
+////Como se completo el registro regresar el id del arreglo
 echo json_encode(array('idArreglo' => $arreglo->idArreglo));
 ?>
