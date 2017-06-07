@@ -78,5 +78,21 @@ class Cliente
         mysqli_close($conexion);
         return $this->direccion->actualizar();
     }
+    function actualizarCredenciales()
+    {
+        //incluir la configuracion a la BD
+        include 'dbConn.inc';
+        $sql = "UPDATE cliente SET "
+            ."token='".$this->token."',"
+            ."tokenExpira=".$this->tokenExpira." "
+            ." WHERE idCliente=".$this->idCliente;
+        $res = mysqli_query($conexion, $sql);
+        //Salir si no se hizo la query
+        if (!res) {
+            return false;
+        }
+        mysqli_close($conexion);
+        return true;
+    }
 }
 ?>
