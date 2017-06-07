@@ -31,5 +31,5 @@ while($r = mysqli_fetch_assoc($res)) {
     }
     $filas[] = $r;
 }
-echo json_encode($filas);
+echo json_encode(array('arreglos' => $filas));
 ?>

@@ -38,25 +38,7 @@ Class ArregloFloral
         mysqli_close($conexion);
         return true;
     }
-    //Agrega una nueva imagen a la base de datos, por medio de la URL
-    function agregarImagen($imagen)
-    {
-        //incluir la configuracion a la BD
-        include 'dbConn.inc';
-        array_push($this->imagenes, $imagen);
-        $sql = "INSERT INTO imagenes (urlImagen, fkArreglo)
-            VALUES ('".$imagen."', ".$this->idArreglo.")";
-        $res = mysqli_query($conexion, $sql);
-        $filasAfectadas = mysqli_affected_rows($conexion);
-        //Si no se creo el arreglo floral, salir
-        if ($filasAfectadas != 1) {
-            return false;
-        }
-        mysqli_close($conexion);
-        return true;
-
-    }
-    //Actualiza este arreglo floral en la BD
+   //Actualiza este arreglo floral en la BD
     //Regresa false sino se pudo hacer, true si fue exitoso
     function actualizar()
     {
