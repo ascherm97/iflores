@@ -1,5 +1,6 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+header("Access-Control-Allow-Origin: http://iflores.esy.es");
 //Class definitions
 include 'iflores.inc';
 //DB connection setup

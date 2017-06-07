@@ -1,5 +1,6 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+header("Access-Control-Allow-Origin: http://iflores.esy.es");
 $data = json_decode(file_get_contents('php://input'), true);
 include 'ArreglosFlorales.inc';
 //Peticion vacia
