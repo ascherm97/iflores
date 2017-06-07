@@ -6,19 +6,15 @@ class Paquete extends ArregloFloral
     public $idPaquete;
     public $contenidoExtra;
 
-    function __construct($nombre, $descripcion, $precio, $disponibilidad, $contenidoExtra)
+    function __construct($idArreglo, $contenidoExtra)
     {
-        parent::__construct($nombre, $descripcion, $precio, $disponibilidad);
+        $this->idArreglo        =  $idArreglo;
         $this->contenidoExtra   =  $contenidoExtra;
     }
 
     //Guardar un paquete en la BD
     function guardar()
     {
-        //Si no se pudo guardar el arreglo mandar false
-        if (!parent::guardar()){
-            return false;
-        }
         //incluir la configuracion a la BD
         include 'dbConn.inc';
         //Crear el paquete referenciando al arreglofloral recien creado
@@ -39,20 +35,18 @@ class Paquete extends ArregloFloral
     //Regresa false sino se pudo hacer, true si fue exitoso
     function actualizar()
     {
-        //Si no se pudo actualizar el arreglo regresar false
-        if (!parent::actualizar()){
-            return false;
-        }
+        //Si no se pudo guardar el arreglo mandar false
+        $arregloActualizado = parent::actualizar();
+
         //incluir la configuracion a la BD
         include 'dbConn.inc';
         $sql = "UPDATE paquete SET "
             ."contenidoExtra ='".$this->contenidoExtra."'"
             ." WHERE idPaquete=".$this->idPaquete;
         $res = mysqli_query($conexion, $sql);
-        echo var_dump($res);
         $filasAfectadas = mysqli_affected_rows($conexion);
         //Si no se creo el arreglo floral, salir
-        if ($filasAfectadas != 1) {
+        if ($filasAfectadas != 1 and !$arregloActualizado) {
             return false;
         }
         mysqli_close($conexion);
