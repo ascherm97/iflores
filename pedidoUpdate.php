@@ -4,19 +4,20 @@ include 'Pedido.inc';
 //Obtener todos los datos del JSON de entrada
 $data = json_decode(file_get_contents('php://input'), true);
 //ID de pedido invalido
-if (is_null($data) or !isset($data["idPedido"])
-    or !is_int($data["idPedido"])) {
+if (is_null($data) or !isset($data["idPedido"])) {
     echo json_encode(array('errorCode' => 400 ));
     return;
 }
-//Validar estatus sea int
-if (!is_int($data["estatus"])) {
+//Validar estatus
+if (!isset($data["estatus"])) {
     echo json_encode(array('errorCode' => 400 ));
     return;
 }
+$data["idPedido"]   = filter_var($data["idPedido"], FILTER_VALIDATE_INT);
+$data["estatus"]    = filter_var($data["estatus"], FILTER_VALIDATE_INT);
 //Validar estatus tenga un valor 0,1,2
 if ($data["estatus"]<0 or $data["estatus"]>2) {
-    echo json_encode(array('errorCode' => 400 ));
+    echo json_encode(array('errorCode' => 401 ));
     return;
 }
 

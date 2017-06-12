@@ -8,12 +8,13 @@ if (is_null($data)) {
     return;
 }
 //Validar idArreglo sea int
-if (!is_int($data["idArreglo"])) {
+$idArreglo = filter_var($data["idArreglo"], FILTER_VALIDATE_INT);
+if (!isset($idArreglo)) {
     echo json_encode(array('errorCode' => 400 ));
     return;
 }
 /// Inicializar objeto con el idArreglo y contenido extra
-$paquete = new Paquete($data["idArreglo"], $data["contenidoExtra"]);
+$paquete = new Paquete($idArreglo, $data["contenidoExtra"]);
 // Intentar guardar el objeto en la BD
 if (!$paquete->guardar()){
     echo json_encode(array('code' => 500 ));

@@ -18,14 +18,14 @@ if (is_null($data) or !isset($data["idPaquete"])
 
 //Inicializar objeto con los datos recibidas
 $paquete = new Paquete(
-    $data["nombre"],
-    $data["descripcion"],
-    $data["precio"],
-    $data["disponibilidad"],
+    filter_var($data["idArreglo"], FILTER_VALIDATE_INT),
     $data["contenidoExtra"]
 );
-$paquete->idArreglo = $data["idArreglo"];
-$paquete->idPaquete = $data["idPaquete"];
+$paquete->nombre            = $data["nombre"];
+$paquete->descripcion       = $data["descripcion"];
+$paquete->precio            = $data["precio"];
+$paquete->disponibilidad    = $data["disponibilidad"];
+$paquete->idPaquete         = filter_var($data["idPaquete"], FILTER_VALIDATE_INT);
 //Actualizar el objeto en la BD
 if (!$paquete->actualizar()){
     echo json_encode(array('code' => 500 ));

@@ -33,7 +33,7 @@ $cliente= new Cliente(
 
 //Intentar guardar el objeto en la BD
 if (!$cliente->guardar()){
-    echo json_encode(array('code' => 500 ));
+    echo json_encode(array('errorCode' => 500 ));
 }
 
 //Como se completo el registro regresar el id del clietne
