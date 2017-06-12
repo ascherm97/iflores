@@ -32,10 +32,19 @@ class Imagen {
     {
         //incluir la configuracion a la BD
         include 'dbConn.inc';
+        //Get the URL for deleting it from the server
+        $res = mysqli_query($conexion, "SELECT urlImagen as url FROM imagenes WHERE idImagen=".$this->idImagen);
+        if (!$res) {
+            return false;
+        }
+        $result = mysqli_fetch_assoc($res);
+        if (!result) {
+            return false;
+        }
+        $this->url  = $result["url"];
         $sql = "DELETE FROM imagenes WHERE idImagen=".$this->idImagen;
         $res = mysqli_query($conexion, $sql);
         $filasAfectadas = mysqli_affected_rows($conexion);
-        echo $filasAfectadas;
         //Si no se creo el arreglo floral, salir
         if ($filasAfectadas != 1) {
             return false;
