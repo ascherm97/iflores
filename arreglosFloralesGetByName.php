@@ -1,9 +1,9 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
 //Class definitions
-include 'iflores.inc';
+include '../../includes/iflores.inc';
 //DB connection setup
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 if (!$conexion) {
     echo json_encode(array('code' => 500 ));
     exit;

@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
-include 'ArreglosFlorales.inc';
+include '../../includes/ArreglosFlorales.inc';
 //Obtener todos los datos del JSON de entrada
 $data = json_decode(file_get_contents('php://input'), true);
 //ID de arreglo invalido

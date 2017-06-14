@@ -1,5 +1,5 @@
 <?php
-include 'Imagen.inc';
+include '../../includes/Imagen.inc';
 
 //Validar que se reciban los datos bien
 $data = json_decode(file_get_contents('php://input'), true);

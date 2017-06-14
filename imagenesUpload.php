@@ -1,5 +1,10 @@
 <?php
-include 'Imagen.inc';
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location: http://www.iflores.esy.es/");
+    exit;
+}
+include '../../includes/Imagen.inc';
 
 //Validar que se reciban los datos bien
 if (!isset($_POST["idArreglo"]) or !isset($_FILES["inpImagenes"]["name"])) {

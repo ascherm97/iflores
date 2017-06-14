@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
 //DB connection setup
-include 'Cliente.inc';
+include '../../includes/Cliente.inc';
 //Recuperar los datos de la peticion
 //$data = json_decode(file_get_contents('php://input'), true);
 $idCliente = filter_input(INPUT_GET, 'idCliente', FILTER_SANITIZE_NUMBER_INT);

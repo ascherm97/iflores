@@ -9,7 +9,7 @@ if (!isset($data["password"])) {
     return;
 }
 //incluir la configuracion a la BD
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 // Obtener el hash para esa cuenta
 $sql = "SELECT passwordHashed as hash FROM vendedor WHERE idVendedor=1";
 $result = mysqli_fetch_assoc(mysqli_query($conexion, $sql));
@@ -35,7 +35,7 @@ $tiempoActual     = time();
 $tiempoExpira = $tiempoActual + 5*60;
 
 //incluir la configuracion a la BD
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 //Guardar las nuevas credenciales en la BD
 $sql = "UPDATE vendedor SET "
     ."token='".$token."',"
@@ -49,5 +49,5 @@ if (!res) {
 mysqli_close($conexion);
 
 //Como se completo el registro regresar el id del arreglo
-echo json_encode(array('idVendedor' => 1));
+echo json_encode(array('token' => $token));
 ?>

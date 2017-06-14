@@ -1,5 +1,5 @@
 <?php
-include 'Cliente.inc';
+include '../../includes/Cliente.inc';
 header("Content-Type: text/html;charset=utf-8");
 
 //Obtener todos los datos del JSON de entrada
@@ -21,7 +21,7 @@ if (!isset($data["password"]) or !isset($data["password"])) {
     return;
 }
 //incluir la configuracion a la BD
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 // Obtener el hash para esa cuenta
 $sql = "SELECT idCliente, nombres,passwordHashed as hash FROM cliente WHERE email='".$data["email"]."'";
 $result = mysqli_fetch_assoc(mysqli_query($conexion, $sql));

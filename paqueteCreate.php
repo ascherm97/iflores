@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
 $data = json_decode(file_get_contents('php://input'), true);
-include 'Paquete.inc';
+include '../../includes/Paquete.inc';
 // Peticion vacia
 if (is_null($data)) {
     echo json_encode(array('errorCode' => 400));

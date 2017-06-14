@@ -1,9 +1,9 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
 //Class definitions
-include 'Pedido.inc';
+include '../../includes/Pedido.inc';
 //DB connection setup
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 //Checar si hay conexion con la base de datos
 if (!$conexion) {
     echo json_encode(array('code' => 500 ));

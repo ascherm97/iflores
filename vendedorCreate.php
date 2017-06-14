@@ -9,7 +9,7 @@ if (is_null($data) or !isset($data["password"])) {
 }
 $passwordHashed     = password_hash($data["password"], PASSWORD_DEFAULT);
 //incluir la configuracion a la BD
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 $sql = "INSERT INTO vendedor(passwordHashed) "
     ."VALUES ('".$passwordHashed."')";
 $res = mysqli_query($conexion, $sql);

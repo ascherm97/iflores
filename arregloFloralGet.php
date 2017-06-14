@@ -1,9 +1,9 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
 //Class definitions
-include 'ArreglosFlorales.inc';
+include '../../includes/ArreglosFlorales.inc';
 //DB connection setup
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 
 //Recuperar los datos de la peticion
 //$data = json_decode(file_get_contents('php://input'), true);

@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
 $data = json_decode(file_get_contents('php://input'), true);
-include 'Cliente.inc';
+include '../../includes/Cliente.inc';
 
 //Peticion vacia
 if (is_null($data)) {
