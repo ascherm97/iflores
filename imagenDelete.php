@@ -1,6 +1,10 @@
 <?php
 include '../../includes/Imagen.inc';
-
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //Validar que se reciban los datos bien
 $data = json_decode(file_get_contents('php://input'), true);
 if (!isset($data["idImagen"])){

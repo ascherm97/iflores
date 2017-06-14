@@ -1,5 +1,10 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //Class definitions
 include '../../includes/Pedido.inc';
 //DB connection setup

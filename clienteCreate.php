@@ -1,7 +1,14 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+ 
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 $data = json_decode(file_get_contents('php://input'), true);
 include '../../includes/Cliente.inc';
+include '../../includes/mailer.inc';
 
 //Peticion vacia
 if (is_null($data)) {
@@ -35,7 +42,7 @@ $cliente= new Cliente(
 if (!$cliente->guardar()){
     echo json_encode(array('errorCode' => 500 ));
 }
-
+$emailEnviado = sendSignUpMail($cliente->email,$cliente->nombres." ".$cliente->apellidoPaterno." ".$cliente->apellidoMaterno);
 //Como se completo el registro regresar el id del clietne
 echo json_encode(array('idCliente' => $cliente->idCliente));
 ?>

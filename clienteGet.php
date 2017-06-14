@@ -1,5 +1,11 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+ 
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "GET"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //DB connection setup
 include '../../includes/Cliente.inc';
 //Recuperar los datos de la peticion
@@ -10,7 +16,7 @@ if (!$idCliente) {
     echo json_encode(array('errorCode' => 400 ));
     return;
 }
-include 'dbConn.inc';
+include '../../includes/dbConn.inc';
 
 //Checar si hay conexion con la base de datos
 if (!$conexion) {

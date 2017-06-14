@@ -32,6 +32,5 @@ function sendSignUpMail($email, $nombre){
         //echo 'Message has been sent';
     }
 }
-echo sendSignUpMail("ascherm97@gmail.com", "Michel jordan valencia Rangel");
 
 ?>

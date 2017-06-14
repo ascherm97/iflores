@@ -1,6 +1,11 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
 header("Access-Control-Allow-Origin: http://iflores.esy.es");
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST" and $method != "GET"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //Class definitions
 include '../../includes/iflores.inc';
 //DB connection setup

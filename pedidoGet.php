@@ -2,6 +2,11 @@
 header("Content-Type: text/html;charset=utf-8");
 //Class definitions
 include '../../includes/Pedido.inc';
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //Recuperar los datos de la peticion
 //$data = json_decode(file_get_contents('php://input'), true);
 $idPedido = filter_input(INPUT_GET, 'idPedido', FILTER_SANITIZE_NUMBER_INT);

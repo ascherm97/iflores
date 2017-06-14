@@ -1,5 +1,11 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST" and $method != "GET"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //Class definitions
 include '../../includes/ArreglosFlorales.inc';
 //DB connection setup

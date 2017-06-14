@@ -1,6 +1,10 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
-
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //Obtener todos los datos del JSON de entrada
 $data = json_decode(file_get_contents('php://input'), true);
 //Password definido
@@ -32,18 +36,14 @@ $token            = bin2hex(random_bytes(16));
 $tiempoActual     = time();
 //Genera el timestamp de expiracion
 //Expira 5 minutos despues de que se le otorgen credenciales
-$tiempoExpira = $tiempoActual + 5*60;
+$tokenExpira = $tiempoActual + 5*60;
 
 //incluir la configuracion a la BD
 include '../../includes/dbConn.inc';
 //Guardar las nuevas credenciales en la BD
-$sql = "UPDATE vendedor SET "
-    ."token='".$token."',"
-    ."tokenExpira=".$tokenExpira." "
-    ." WHERE idVendedor=1";
-$res = mysqli_query($conexion, $sql);
+$sql = "UPDATE vendedor SET token='$token',tokenExpira=$tokenExpira WHERE idVendedor=1";
 //Salir si no se hizo la query
-if (!res) {
+if (!mysqli_query($conexion, $sql)) {
     echo json_encode(array('errorCode' => 500));
 }
 mysqli_close($conexion);

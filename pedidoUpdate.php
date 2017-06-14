@@ -1,5 +1,10 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 include '../../includes/Pedido.inc';
 //Obtener todos los datos del JSON de entrada
 $data = json_decode(file_get_contents('php://input'), true);
@@ -46,5 +51,5 @@ if ($filasAfectadas != 1) {
 mysqli_close($conexion);
 
 //Como se completo el registro regresar el id del arreglo
-echo json_encode(array('code' => $data["idPedido"]));
+echo json_encode(array('actualizado' => true));
 ?>

@@ -1,7 +1,11 @@
 <?php
 include '../../includes/Cliente.inc';
 header("Content-Type: text/html;charset=utf-8");
-
+$method = $_SERVER['REQUEST_METHOD'];
+if($method != "POST"){
+    header("Location:  http://iflores.esy.es/");
+    exit;
+}
 //Obtener todos los datos del JSON de entrada
 $data = json_decode(file_get_contents('php://input'), true);
 //Peticion vacia
